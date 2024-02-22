@@ -13,8 +13,8 @@
 
 .video-player{
     background-color: black;
-    width: 150%;
-    height: auto;
+    width: 80%;
+    height: 80%;
     object-fit: cover;
 }
 
