@@ -19,13 +19,23 @@ let localStream;
 let remoteStream;
 let peerConnection;
 
-const servers = {
-    iceServers:[
-        {
-            urls: 'stun:stun.l.google.com:19302'
-        }
-    ]
-}
+peerConnection.setRemoteDescription(remoteDescription)
+    .then(() => {
+        console.log('Remote description set successfully.');
+        const servers = {
+            iceServers: [
+                {
+                    urls: ['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302']
+                }
+            ]
+        };
+
+        peerConnection = new RTCPeerConnection(servers);
+
+    })
+    .catch((error) => {
+        console.error('Error setting remote description:', error);
+    });
 
 
 let constraints = {
@@ -86,7 +96,7 @@ let handleUserJoined = async (MemberId) => {
 
 
 let createPeerConnection = async (MemberId) => {
-    peerConnection = new RTCPeerConnection(servers)
+    //peerConnection = new RTCPeerConnection(servers)
 
     remoteStream = new MediaStream()
     document.getElementById('user-2').srcObject = remoteStream
