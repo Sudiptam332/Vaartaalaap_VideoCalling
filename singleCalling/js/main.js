@@ -26,8 +26,6 @@ const configuration = {
     ]
 };
 
-peerConnection = new RTCPeerConnection(configuration);
-
 let constraints = {
     video: {
         width: { min: 640, ideal: 1920, max: 1920 },
@@ -69,8 +67,14 @@ let handleMessageFromPeer = async (message, MemberId) => {
     }
 
     if (message.type === 'candidate') {
-        if (peerConnection) {
-            peerConnection.addIceCandidate(message.candidate);
+        if (peerConnection && peerConnection.remoteDescription) {
+            try {
+                await peerConnection.addIceCandidate(message.candidate);
+            } catch (e) {
+                console.error('Error adding ICE candidate:', e);
+            }
+        } else {
+            console.warn('ICE candidate received before setting remote description.');
         }
     }
 };
@@ -81,14 +85,6 @@ let handleUserJoined = async (MemberId) => {
 };
 
 let createPeerConnection = async (MemberId) => {
-    const configuration = {
-        iceServers: [
-            {
-                urls: ['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302']
-            }
-        ]
-    };
-
     peerConnection = new RTCPeerConnection(configuration);
 
     remoteStream = new MediaStream();
