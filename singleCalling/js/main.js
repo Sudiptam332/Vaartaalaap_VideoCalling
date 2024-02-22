@@ -1,11 +1,9 @@
 let APP_ID = "7eb2f009bc6c4a6496f021c2dffe5f0d";
-
 let token = null;
 let uid = String(Math.floor(Math.random() * 10000));
 
 let client;
 let channel;
-
 let queryString = window.location.search;
 let urlParams = new URLSearchParams(queryString);
 let roomId = urlParams.get('room');
@@ -26,16 +24,6 @@ const configuration = {
     ]
 };
 
-peerConnection = new RTCPeerConnection(configuration);
-
-let constraints = {
-    video: {
-        width: { min: 640, ideal: 1920, max: 1920 },
-        height: { min: 480, ideal: 1080, max: 1080 },
-    },
-    audio: true
-};
-
 let init = async () => {
     client = await AgoraRTM.createInstance(APP_ID);
     await client.login({ uid, token });
@@ -48,7 +36,7 @@ let init = async () => {
 
     client.on('MessageFromPeer', handleMessageFromPeer);
 
-    localStream = await navigator.mediaDevices.getUserMedia(constraints);
+    localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
     document.getElementById('user-1').srcObject = localStream;
 };
 
@@ -90,7 +78,7 @@ let createPeerConnection = async (MemberId) => {
     document.getElementById('user-1').classList.add('smallFrame');
 
     if (!localStream) {
-        localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true }); // changed to 'true' for audio
+        localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
         document.getElementById('user-1').srcObject = localStream;
     }
 
