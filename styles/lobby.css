@@ -2,7 +2,7 @@
   width: 90%;
   max-width: 600px;
   border-radius: 10px;
-  background-color: #262625;
+  background-color: #be8fd9;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -17,7 +17,7 @@
   border-radius: 10px 10px 0 0;
   padding: 10px;
   text-align: center;
-  background-color: #363739;
+  background-color: #030303;
   margin: 0;
   font-size: 18px;
   font-size: 300;
@@ -39,22 +39,22 @@
 
 .form__field__wrapper input {
   box-sizing: border-box;
-  color: #fff;
+  color: #ffffff;
   width: 100%;
   margin: 0;
   border: none;
   border-radius: 5px;
   padding: 16px 20px;
   font-size: 15px;
-  background-color: #3f434a;
+  background-color: #383838;
 }
 
 .form__field__wrapper button[type='submit'] {
   margin-top: 32px;
   cursor: pointer;
-  background-color: #845695;
+  background-color: #0a61a8;
   border: none;
-  color: #fff;
+  color: #fcf7f7;
   font-size: 16px;
   width: 100%;
   display: flex;
@@ -66,12 +66,12 @@
 }
 
 .form__field__wrapper button[type='submit'] svg {
-  fill: #ede0e0;
+  fill: #ffffff;
   width: 20px;
 }
 
 #avatar__selection {
-  margin-reight: 10px;
+  margin-right:10px;
   display: flex;
   gap: 1em;
 }
@@ -82,7 +82,7 @@
   border-radius: 50%;
   cursor: pointer;
   transition: 0.3s;
-  border: 2px solid #797a79;
+  border: 2px solid #505050;
 }
 
 .avatar__option__selected {

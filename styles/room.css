@@ -12,8 +12,8 @@
 }
 
 #members__container {
-  background-color: #262625;
-  border-right: 1px solid #797a79;
+  background-color:#111;
+  border-right: 1px solid #111;
   overflow-y: auto;
   width: 90%;
   max-width: 250px;
@@ -128,7 +128,7 @@
 
 .message__author__bot {
   margin-right: 10px;
-  color: #a52aca!important;
+  color: #2e38eb!important;
 
 }
 
@@ -214,7 +214,7 @@
   height: 300px;
   width: 300px;
 
-  background-image: url("/images/logo.png");
+  background-image: url("/images/nlogo.jpeg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: 75px;
@@ -339,7 +339,7 @@
 }
 
 #join-btn{
-  background-color: #845695;
+  background-color: #0a61a8;
   font-size: 18px;
   padding: 25px 50px;
   border: none;
