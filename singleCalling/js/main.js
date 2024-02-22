@@ -26,6 +26,8 @@ const configuration = {
     ]
 };
 
+peerConnection = new RTCPeerConnection(configuration);
+
 let constraints = {
     video: {
         width: { min: 640, ideal: 1920, max: 1920 },
@@ -67,14 +69,8 @@ let handleMessageFromPeer = async (message, MemberId) => {
     }
 
     if (message.type === 'candidate') {
-        if (peerConnection && peerConnection.remoteDescription) {
-            try {
-                await peerConnection.addIceCandidate(message.candidate);
-            } catch (e) {
-                console.error('Error adding ICE candidate:', e);
-            }
-        } else {
-            console.warn('ICE candidate received before setting remote description.');
+        if (peerConnection) {
+            peerConnection.addIceCandidate(message.candidate);
         }
     }
 };
@@ -94,7 +90,7 @@ let createPeerConnection = async (MemberId) => {
     document.getElementById('user-1').classList.add('smallFrame');
 
     if (!localStream) {
-        localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
+        localStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true }); // changed to 'true' for audio
         document.getElementById('user-1').srcObject = localStream;
     }
 
@@ -147,7 +143,7 @@ let leaveChannel = async () => {
 };
 
 let toggleCamera = async () => {
-    let videoTrack = localStream.getTracks().find(track => track.kind === 'video');
+    let videoTrack = localStream.getVideoTracks()[0]; // Get the first video track
 
     if (videoTrack.enabled) {
         videoTrack.enabled = false;
@@ -159,7 +155,7 @@ let toggleCamera = async () => {
 };
 
 let toggleMic = async () => {
-    let audioTrack = localStream.getTracks().find(track => track.kind === 'audio');
+    let audioTrack = localStream.getAudioTracks()[0]; // Get the first audio track
 
     if (audioTrack.enabled) {
         audioTrack.enabled = false;
