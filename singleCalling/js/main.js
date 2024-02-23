@@ -18,11 +18,11 @@ let peerConnection;
 
 const configuration = {
     iceServers: [
-        {
-            urls: ['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302']
-        }
+        { urls: ['stun:stun1.l.google.com:19302', 'stun:stun2.l.google.com:19302'] },
+        { urls: 'turn:your.turnserver.com:3478', username: uid, credential: roomId }
     ]
 };
+
 
 let init = async () => {
     client = await AgoraRTM.createInstance(APP_ID);
