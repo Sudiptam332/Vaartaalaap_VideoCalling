@@ -71,6 +71,8 @@ let handleChannelMessage = async (messageData, MemberId) => {
     }
 }
 
+const sub_btn = document.querySelector("#sub_msg_btn");
+
 let sendMessage = async (e) => {
     e.preventDefault()
 
@@ -78,6 +80,7 @@ let sendMessage = async (e) => {
     channel.sendMessage({text:JSON.stringify({'type':'chat', 'message':message, 'displayName':displayName})})
     addMessageToDom(displayName, message)
     e.target.reset()
+    sub_btn.removeEventListener("click", sub);
 }
 
 let addMessageToDom = (name, message) => {
@@ -121,6 +124,8 @@ let leaveChannel = async () => {
     await channel.leave()
     await rtmClient.logout()
 }
+
+
 
 window.addEventListener('beforeunload', leaveChannel)
 let messageForm = document.getElementById('message__form')
